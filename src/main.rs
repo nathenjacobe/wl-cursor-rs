@@ -214,6 +214,7 @@ impl Dispatch<WlPointer, ()> for App {
                 if state == wl_pointer::ButtonState::Pressed && app.cursor_known {
                     println!("{:.0} {:.0}", app.cursor_x, app.cursor_y);
                     let _ = io::stdout().flush();
+                    app.running = false;
                 }
             }
 
@@ -415,4 +416,14 @@ fn main() {
             break;
         }
     }
+
+    if let Some(layer_surface) = app.layer_surface.take() {
+        layer_surface.destroy();
+    }
+
+    if let Some(surface) = app.surface.take() {
+        surface.destroy();
+    }
+
+    let _ = event_queue.roundtrip(&mut app);
 }

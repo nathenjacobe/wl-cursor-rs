@@ -256,7 +256,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "wl-find-cursor-rs"
+name = "wl-cursor"
 version = "0.1.0"
 dependencies = [
  "tempfile",
